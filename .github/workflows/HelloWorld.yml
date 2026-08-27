@@ -7,8 +7,8 @@ on:
 permissions:
   checks: write
 
-env:
-  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+#env:
+#  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
 jobs:
   run-hello-world:
