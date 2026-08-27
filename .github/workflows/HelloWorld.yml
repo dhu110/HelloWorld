@@ -1,31 +1,32 @@
-name: HelloWorld_CI
+name: HelloWorld CI
 
 on:
-push:
-branches: [master]
+  push:
+    branches: [master]
 
 permissions:
-checks: write
+  checks: write
 
-env:
-MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
+#env:
+#  MLM_LICENSE_TOKEN: ${{ secrets.MATLAB_BATCH_TOKEN }}
 
 jobs:
-run-hello-world:
-runs-on: ubuntu-latest
+  run-hello-world:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
 
-steps:
-- name: Check out repository
-uses: actions/checkout@v4
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2026a
 
-- name: Set up MATLAB
-uses: matlab-actions/setup-matlab@v2
-with:
-release: R2024a
+      - name: Run HelloWord script
+        uses: matlab-actions/run-command@v3
+        with:
+          command: 
+            openProject("HelloWorld.prj"); 
+            HelloWord;
 
-- name: Run HelloWord script
-uses: matlab-actions/run-command@v2
-with:
-command: |
-openProject("HelloWorld.prj"); 
-HelloWord;
